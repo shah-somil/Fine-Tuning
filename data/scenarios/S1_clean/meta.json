@@ -1,0 +1,21 @@
+{
+  "seed": 42,
+  "scenario": "S1_clean",
+  "sources_train": [
+    "allagree"
+  ],
+  "sources_val": [
+    "allagree"
+  ],
+  "source_test": "allagree_gold",
+  "label2id": {
+    "negative": 0,
+    "neutral": 1,
+    "positive": 2
+  },
+  "counts": {
+    "train": 1581,
+    "val": 339,
+    "test": 339
+  }
+}

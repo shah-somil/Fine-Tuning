@@ -1,0 +1,23 @@
+{
+  "seed": 42,
+  "scenario": "S2_clean75",
+  "sources_train": [
+    "75agree",
+    "allagree"
+  ],
+  "sources_val": [
+    "75agree",
+    "allagree"
+  ],
+  "source_test": "allagree_gold",
+  "label2id": {
+    "negative": 0,
+    "neutral": 1,
+    "positive": 2
+  },
+  "counts": {
+    "train": 2560,
+    "val": 549,
+    "test": 339
+  }
+}

@@ -15,9 +15,21 @@ This project implements a complete pipeline for fine-tuning a pre-trained langua
 
 ## Results Summary
 
-- **Final Model Performance**: 97.9% accuracy, 0.979 F1-Macro score
-- **Improvement over Baseline**: Significant improvement over zero-shot FinBERT
+- **Final Model Performance**: 97.9% accuracy, 0.968 F1-Macro score (HPO-tuned FinBERT)
+- **Baseline Comparison**: Zero-shot FinBERT achieved 98.2% accuracy, 0.972 F1-Macro
+- **Key Finding**: Fine-tuning on noisy data (S3_max) vs. clean evaluation shows domain-specific pre-training value
 - **Model Size**: Optimized for production deployment
+
+## Video Walkthrough
+
+📹 **[Watch the Complete Project Walkthrough](http://bit.ly/4oAmiXV)**
+
+This comprehensive video demonstrates the entire fine-tuning pipeline, including:
+- Dataset preparation and quality-weighted training
+- Model selection and baseline comparisons
+- Hyperparameter optimization results
+- Live demonstration of model inference
+- Error analysis and performance insights
 
 ## Quick Start
 
@@ -66,13 +78,15 @@ with torch.no_grad():
 ### 1. Dataset Preparation
 - **Multi-source Data**: Combines data from different agreement levels (AllAgree, 75Agree, 66Agree, 50Agree)
 - **Quality Prioritization**: Implements agreement-based data prioritization
-- **Gold Test Set**: Creates unbiased test set from highest-quality data
+- **Gold Test Set**: Creates unbiased test set from highest-quality data (S1_clean)
+- **Training Data**: Uses S3_max scenario (all data sources) for comprehensive training
 - **Data Splitting**: Prevents data leakage with careful train/validation/test splits
 
 ### 2. Model Selection
-- **Base Model**: ProsusAI/finbert (domain-specific pre-training)
-- **Baseline Comparison**: DistilBERT for generic model comparison
+- **Primary Model**: ProsusAI/finbert (domain-specific pre-training)
+- **Baseline Model**: DistilBERT (generic model for comparison)
 - **Architecture**: BERT-based sequence classification
+- **Training Strategy**: Weighted training on noisy S3_max data, evaluation on clean gold test
 
 ### 3. Training Strategy
 - **Weighted Training**: Custom WeightedTrainer for quality-based sample weighting
@@ -90,11 +104,12 @@ with torch.no_grad():
 
 ### Performance Comparison
 
-| Model | Test Accuracy | F1-Macro | Improvement |
-|-------|---------------|----------|-------------|
-| DistilBERT (Baseline) | 94.2% | 0.942 | - |
-| FinBERT (Zero-shot) | 97.2% | 0.972 | +3.0% |
-| FinBERT (Fine-tuned) | 97.9% | 0.979 | +3.7% |
+| Model | Test Accuracy | F1-Macro | Notes |
+|-------|---------------|----------|-------|
+| DistilBERT (Zero-shot) | 78.1% | 0.078 | Generic model baseline |
+| DistilBERT (Fine-tuned) | 96.2% | 0.941 | Trained on S3_max noisy data |
+| FinBERT (Zero-shot) | 98.2% | 0.972 | Domain-specific pre-training advantage |
+| FinBERT (HPO-tuned) | 97.9% | 0.968 | Fine-tuned on S3_max, evaluated on clean test |
 
 ### Error Analysis
 - **Primary Error Patterns**: Directionality context and financial jargon

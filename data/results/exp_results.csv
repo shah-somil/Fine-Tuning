@@ -1,0 +1,11 @@
+timestamp,scenario,model,epochs,batch_train,lr,label_smoothing,use_weights,val_f1_macro,test_acc,test_f1_macro,checkpoint,warmup_ratio,max_len
+2025-10-24 00:41:27,S3_max,ProsusAI/finbert,4,16.0,2e-05,0.05,True,0.8747547607594269,0.976401179941003,0.9667374587587356,,,
+2025-10-24 01:20:14,S1_clean (gold test),finbert-sentiment-best,3,,3e-05,,,,0.988201,0.979095,/content/drive/MyDrive/prompt_engineering/fine_tuning/models/finbert-sentiment-best,0.0,256.0
+2025-10-24 01:55:04,S1_clean,ProsusAI/finbert,4,16.0,2e-05,0.05,True,0.9649170044948946,0.9734513274336284,0.958901710604497,,,
+2025-10-24 02:08:33,S1_clean (gold test),finbert-sentiment-best,3,,3e-05,,,,0.988201,0.979095,/content/drive/MyDrive/prompt_engineering/fine_tuning/models/finbert-sentiment-best,0.0,256.0
+2025-10-24 02:30:36,S1_clean,distilbert-base-uncased,4,16.0,2e-05,0.05,True,0.957048718849018,0.9616519174041298,0.9414056531703592,,,
+2025-10-24 02:32:04,S1_clean,distilbert-base-uncased,4,16.0,2e-05,0.05,True,0.957048718849018,0.9616519174041298,0.9414056531703592,,,
+2025-10-24 02:41:14,S1_clean (gold test),finbert-sentiment-best,3,,3e-05,,,,0.988201,0.979095,/content/drive/MyDrive/prompt_engineering/fine_tuning/models/finbert-sentiment-best,0.0,256.0
+2025-10-24 03:08:03,S2_clean75,distilbert-base-uncased,4,16.0,2e-05,0.05,True,0.9235085262557764,0.9616519174041298,0.9411154770561788,,,
+2025-10-24 03:11:35,S2_clean75,distilbert-base-uncased,4,16.0,2e-05,0.05,True,0.9235085262557764,0.9616519174041298,0.9411154770561788,,,
+2025-10-24 03:21:10,S1_clean (gold test),finbert-sentiment-best,3,,3e-05,,,,0.988201,0.979095,/content/drive/MyDrive/prompt_engineering/fine_tuning/models/finbert-sentiment-best,0.0,256.0

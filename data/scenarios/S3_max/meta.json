@@ -1,0 +1,27 @@
+{
+  "seed": 42,
+  "scenario": "S3_max",
+  "sources_train": [
+    "50agree",
+    "66agree",
+    "75agree",
+    "allagree"
+  ],
+  "sources_val": [
+    "50agree",
+    "66agree",
+    "75agree",
+    "allagree"
+  ],
+  "source_test": "allagree_gold",
+  "label2id": {
+    "negative": 0,
+    "neutral": 1,
+    "positive": 2
+  },
+  "counts": {
+    "train": 3704,
+    "val": 795,
+    "test": 339
+  }
+}

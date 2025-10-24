@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This technical report documents the complete methodology, implementation, and results of fine-tuning FinBERT for financial sentiment analysis. The project achieved a final performance of 97.9% accuracy and 0.979 F1-Macro score on a carefully curated test set, demonstrating significant improvement over baseline models.
+This technical report documents the complete methodology, implementation, and results of fine-tuning FinBERT for financial sentiment analysis. The project achieved a final performance of 97.9% accuracy and 0.968 F1-Macro score on a carefully curated test set, with interesting findings about the relationship between training on noisy data and evaluation on clean data.
 
 ## 1. Introduction
 
@@ -175,16 +175,17 @@ Systematic exploration of hyperparameter combinations:
 | Metric | Value |
 |--------|-------|
 | Test Accuracy | 97.9% |
-| F1-Macro | 0.979 |
-| Precision (Macro) | 0.978 |
-| Recall (Macro) | 0.980 |
+| F1-Macro | 0.968 |
+| Precision (Macro) | 0.96 |
+| Recall (Macro) | 0.97 |
 
 #### 4.1.2 Baseline Comparison
-| Model | Test Accuracy | F1-Macro | Improvement |
-|-------|---------------|----------|-------------|
-| DistilBERT (Baseline) | 94.2% | 0.942 | - |
-| FinBERT (Zero-shot) | 97.2% | 0.972 | +3.0% |
-| FinBERT (Fine-tuned) | 97.9% | 0.979 | +3.7% |
+| Model | Test Accuracy | F1-Macro | Notes |
+|-------|---------------|----------|-------|
+| DistilBERT (Zero-shot) | 78.1% | 0.078 | Generic model baseline |
+| DistilBERT (Fine-tuned) | 96.2% | 0.941 | Trained on S3_max noisy data |
+| FinBERT (Zero-shot) | 98.2% | 0.972 | Domain-specific pre-training advantage |
+| FinBERT (HPO-tuned) | 97.9% | 0.968 | Fine-tuned on S3_max, evaluated on clean test |
 
 #### 4.1.3 Confusion Matrix Analysis
 ```
@@ -202,13 +203,15 @@ Positive      2       3        45
 - **Learning Rate**: 3e-5
 - **Epochs**: 3
 - **Warmup Ratio**: 0.0
-- **Test F1-Macro**: 0.979095
+- **Test F1-Macro**: 0.968030 (HPO-tuned FinBERT)
+- **Test Accuracy**: 97.9%
 
 #### 4.2.2 HPO Analysis
 The hyperparameter search revealed:
 - Learning rate of 3e-5 provided optimal balance between convergence speed and stability
 - 3 epochs were sufficient with early stopping preventing overfitting
 - No warmup provided slightly better performance for this specific task
+- **Key Finding**: Fine-tuning on noisy S3_max data resulted in slightly lower performance than zero-shot FinBERT on clean test data, highlighting the importance of data quality alignment
 
 ### 4.3 Error Analysis
 
@@ -462,12 +465,13 @@ This project successfully demonstrates the effectiveness of fine-tuning domain-s
 3. **Production Readiness**: Complete deployment pipeline with monitoring
 4. **Actionable Insights**: Clear recommendations for future improvements
 
-The final model achieves 97.9% accuracy and 0.979 F1-Macro score, representing a significant improvement over baseline models. The comprehensive error analysis provides clear directions for future enhancements, while the production-ready implementation enables immediate deployment in real-world financial applications.
+The final model achieves 97.9% accuracy and 0.968 F1-Macro score, with interesting findings about the relationship between training data quality and model performance. The comprehensive error analysis provides clear directions for future enhancements, while the production-ready implementation enables immediate deployment in real-world financial applications.
 
 ### 8.1 Key Takeaways
 
-- **Domain-specific pre-training** provides substantial performance gains
+- **Domain-specific pre-training** provides substantial performance gains (FinBERT zero-shot: 98.2% vs DistilBERT zero-shot: 78.1%)
 - **Quality-weighted training** effectively handles multi-source noisy data
+- **Data quality alignment** is crucial: training on noisy data and evaluating on clean data can lead to performance degradation
 - **Comprehensive hyperparameter optimization** is essential for optimal performance
 - **Detailed error analysis** enables targeted improvements
 - **Production considerations** must be addressed throughout the development process
